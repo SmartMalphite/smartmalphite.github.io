@@ -1,31 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>LeetCode.139 | 单词拆分</title>
-    <url>/2022/05/20/00-Leetcode-139-word-break/</url>
-    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><a href="https://leetcode.cn/problems/word-break/">题目描述</a></h2><blockquote>
-<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。<br>注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
-</blockquote>
-<p>示例 ：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]</span><br><span class="line">输出: true</span><br><span class="line">解释: 返回 true 因为 &quot;leetcode&quot; 可以由 &quot;leet&quot; 和 &quot;code&quot; 拼接成。</span><br></pre></td></tr></table></figure>
-
-<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>假如要判断字符串”catsanddog”是否满足条件，我们可以采取<code>分而治之</code>的思路去思考，比如将字符串切割成两部分去分别判断，当前后两部分都满足条件时则可以证明这个字符串整体也是满足条件的；</p>
-<p>这种思路的本质是将字符串分为两部分去看，后半部分为<code>本次待判断</code>的字符串，前半部分为不包括最后一个字符串的其余部分。那么如何求前半部分是否满足条件呢? 也可以通过相同的方式在进行一次分割判断。</p>
-<p>此时已经将此问题翻译成了一个标准的动态规划题目</p>
-<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>代码实现上可以采取两层循环的方式: <code>外层循环</code>设置变量i作为每个<code>待判断子串</code>(即s[0,i])的结尾。从1开始，循环至字符串最后一个字符，逐步判断每个子串是否满足条件，并将结果记录下来方便对下个子串进行判断时的搜索。即逐步判断’c’, ‘ca’, ‘cat’, ‘cats’ … ‘catsanddog’是否满足条件。 </p>
-<p><code>内层循环</code>设置变量j在每个由外层循环切割出的子串内进行<code>遍历切割</code>，根据记忆化搜索的结果判断当前子串是否满足条件。比如待判断子串为’catsanddog’时，将其切割为[‘c’, ‘atsanddog’]、[‘ca’, ‘tsanddog’]等等，最终发现切割为[‘catsand’, ‘dog’]时可以满足条件(‘catsand’子串命中记忆化搜索，’dog’命中字典)</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">wordBreak</span><span class="params">(s <span class="type">string</span>, wordDict []<span class="type">string</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">    wordDictSet := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">bool</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> _,v := <span class="keyword">range</span> wordDict&#123;</span><br><span class="line">        wordDictSet[v] = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    dp := <span class="built_in">make</span>([]<span class="type">bool</span>, <span class="built_in">len</span>(s)+<span class="number">1</span>)</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">1</span>;i&lt;=<span class="built_in">len</span>(s);i++&#123;</span><br><span class="line">        <span class="keyword">for</span> j:=<span class="number">0</span>;j&lt;i;j++&#123;</span><br><span class="line">            <span class="keyword">if</span> dp[j] &amp;&amp; wordDictSet[s[j:i]]&#123;</span><br><span class="line">                dp[i] = <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="built_in">len</span>(s)]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>刷题</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Hexo 搭建 &amp; 使用指南</title>
-    <url>/2022/05/17/99-Others-01-hexo/</url>
+    <url>/2022/05/17/Deploy/hexo/</url>
     <content><![CDATA[<h2 id="什么是Hexo"><a href="#什么是Hexo" class="headerlink" title="什么是Hexo"></a>什么是Hexo</h2><blockquote>
 <p>Hexo 是一个可以易于上手、部署的静态博客架构。使用node.js作为构建引擎，插件库丰富，可扩展性好。支持MarkDown作为书写语言，可以满足日常博客编写需求</p>
 </blockquote>
@@ -81,10 +58,273 @@
 <p>主题的配置一般放在<code>themes/&lt;themename&gt;/_config.yml</code>文件下，具体配置参考<a href="https://shen-yu.gitee.io/2019/ayer/">官方文档</a>即可</p>
 ]]></content>
       <categories>
-        <category>折腾</category>
+        <category>服务搭建</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Go的字符串:编码与操作</title>
+    <url>/2022/07/24/GoNote/Go%E7%9A%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BC%96%E7%A0%81/</url>
+    <content><![CDATA[<h2 id="Go语言中字符串的编码"><a href="#Go语言中字符串的编码" class="headerlink" title="Go语言中字符串的编码:"></a>Go语言中字符串的编码:</h2><p>Go 语言在看待 Go 字符串组成这个问题上，有两种视角。</p>
+<p>一种是<strong>字节视角</strong>，也就是和所有其它支持字符串的主流语言一样，Go 语言中的字符串值也是一个可空的字节序列，字节序列中的字节个数称为该字符串的长度。一个个的字节只是孤立数据，不表意</p>
+<p>如果要表意，我们就需要从字符串的另外一个视角来看，也就是字符串是由一个可空的字符序列构成(即<strong>字符视角</strong>)。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&quot;中国人&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 字节视角</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;the length of s = %d\n&quot;</span>, <span class="built_in">len</span>(s)) <span class="comment">// 9</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s); i++ &#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;0x%x &quot;</span>, s[i]) <span class="comment">// 0xe4 0xb8 0xad 0xe5 0x9b 0xbd 0xe4 0xba 0xba</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字符视角</span></span><br><span class="line">fmt.Println(<span class="string">&quot;the character count in s is&quot;</span>, utf8.RuneCountInString(s)) <span class="comment">// 3</span></span><br><span class="line"><span class="keyword">for</span> _, c := <span class="keyword">range</span> s &#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;0x%x &quot;</span>, c) <span class="comment">// 0x4e2d 0x56fd 0x4eba</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h3><p>Go 采用的是 Unicode 字符集，每个字符都是一个 Unicode 字符，上述例子中字符视角下输出的 <code>0x4e2d</code>、<code>0x56fd</code> 和 <code>0x4eba</code> 就是 Unicode 字符的表示。以 <code>0x4e2d</code> 为例，它是汉字“中”在 Unicode 字符集表中的码点（Code Point）。Unicode字符集为绝大部分语言的字符提供了统一的编码集。</p>
+<p>Unicode 字符集中的每个字符，都被分配了统一且唯一的字符编号。所谓 Unicode 码点，就是指将 Unicode 字符集中的所有字符“排成一队”，字符在这个“队伍”中的位次，就是它在 Unicode 字符集中的码点。也就说，一个码点唯一对应一个字符。</p>
+<h3 id="UTF-8"><a href="#UTF-8" class="headerlink" title="UTF-8"></a>UTF-8</h3><p>UTF-8 编码解决的是 Unicode 码点值在计算机中如何存储的问题。那么为什么不直接用unicode码点存储呢? 主要有如下几个问题:</p>
+<ul>
+<li>由于Unicode采用的是4个字节的固定长度编码，与ASCII无法兼容。</li>
+<li>浪费存储空间</li>
+</ul>
+<p>UTF-8方案使用了变长设计，对Unicode的码点进行编码。其长度从1到4不等，并且前128个与ASCII兼容(即内存中如<code>A</code> <code>B</code> <code>C</code> 之类的字符时， ASCII字符编码可以被当做UTF-8编码直接使用)<br><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20220724230323.png"></p>
+<h3 id="Go语言如何表示一个码点"><a href="#Go语言如何表示一个码点" class="headerlink" title="Go语言如何表示一个码点"></a>Go语言如何表示一个码点</h3><p>Go 使用 rune 这个类型来表示一个 Unicode 码点。rune 本质上是 int32 类型的别名类型，它与 int32 类型是完全等价的</p>
+<p>由于一个 Unicode 码点唯一对应一个 Unicode 字符。所以我们可以说，一个 rune 实例就是一个 Unicode 字符，一个 Go 字符串也可以被视为 rune 实例的集合。我们可以通过字符字面值来初始化一个 rune 变量。</p>
+<p>那么现在我们就使用 Go 在标准库中提供的 UTF-8 包，对 Unicode 字符（rune）进行编解码试试看：</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// rune -&gt; []byte                                                                            </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">encodeRune</span><span class="params">()</span></span> &#123;                                                                          </span><br><span class="line">    <span class="keyword">var</span> r <span class="type">rune</span> = <span class="number">0x4E2D</span>                                                                      </span><br><span class="line">    fmt.Printf(<span class="string">&quot;the unicode charactor is %c\n&quot;</span>, r) <span class="comment">// 中                                     </span></span><br><span class="line">    buf := <span class="built_in">make</span>([]<span class="type">byte</span>, <span class="number">3</span>)                                                                   </span><br><span class="line">    _ = utf8.EncodeRune(buf, r) <span class="comment">// 对rune进行utf-8编码                                                           </span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;utf-8 representation is 0x%X\n&quot;</span>, buf) <span class="comment">// 0xE4B8AD                            </span></span><br><span class="line">&#125;                                                                                            </span><br><span class="line">                                                                                             </span><br><span class="line"><span class="comment">// []byte -&gt; rune                                                                            </span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">decodeRune</span><span class="params">()</span></span> &#123;                                                                          </span><br><span class="line">    <span class="keyword">var</span> buf = []<span class="type">byte</span>&#123;<span class="number">0xE4</span>, <span class="number">0xB8</span>, <span class="number">0xAD</span>&#125;                                                       </span><br><span class="line">    r, _ := utf8.DecodeRune(buf) <span class="comment">// 对buf进行utf-8解码</span></span><br><span class="line">    fmt.Printf(<span class="string">&quot;the unicode charactor after decoding [0xE4, 0xB8, 0xAD] is %s\n&quot;</span>, <span class="type">string</span>(r)) <span class="comment">// 中</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Go字符串类型的底层实现"><a href="#Go字符串类型的底层实现" class="headerlink" title="Go字符串类型的底层实现"></a>Go字符串类型的底层实现</h3><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// $GOROOT/src/reflect/value.go</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// StringHeader是一个string的运行时表示</span></span><br><span class="line"><span class="keyword">type</span> StringHeader <span class="keyword">struct</span> &#123;</span><br><span class="line">    Data <span class="type">uintptr</span></span><br><span class="line">    Len  <span class="type">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从源码中和下面的图中可以看出string类型并不是单纯的”字符的数组”，而是有一个指向数据数据的指针和长度字段组成的结构体。<br>这也就很好的解释了string类型获取长度的时间复杂度是常数的原因。</p>
+<p><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20220724230920.png"></p>
+<h2 id="常用字符串操作"><a href="#常用字符串操作" class="headerlink" title="常用字符串操作"></a>常用字符串操作</h2><h3 id="下标操作"><a href="#下标操作" class="headerlink" title="下标操作"></a>下标操作</h3><p>在字符串的实现中，真正存储数据的是底层的数组。字符串的下标操作本质上等价于底层数组的下标操作</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&quot;中国人&quot;</span></span><br><span class="line">fmt.Printf(<span class="string">&quot;0x%x\n&quot;</span>, s[<span class="number">0</span>]) <span class="comment">// 0xe4：字符“中” utf-8编码的第一个字节</span></span><br></pre></td></tr></table></figure>
+<p>我们可以看到，通过下标操作，我们获取的是<strong>字符串中特定下标上的字节，而不是字符。</strong></p>
+<h3 id="迭代操作"><a href="#迭代操作" class="headerlink" title="迭代操作"></a>迭代操作</h3><p>Go 有两种迭代形式：常规 for 迭代与 for range 迭代。需要注意的是，通过这两种形式的迭代对字符串进行操作得到的结果是不同的。<br>通过常规 for 迭代对字符串进行的操作是一种字节视角的迭代，而通过 for range 迭代，我们每轮迭代得到的是字符串中 Unicode 字符的码点值，以及该字符在字符串中的偏移值。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s = <span class="string">&quot;中国人&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// for 迭代</span></span><br><span class="line"><span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="built_in">len</span>(s); i++ &#123;</span><br><span class="line">  fmt.Printf(<span class="string">&quot;index: %d, value: 0x%x\n&quot;</span>, i, s[i])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// for range迭代</span></span><br><span class="line"><span class="keyword">for</span> i, v := <span class="keyword">range</span> s &#123;</span><br><span class="line">    fmt.Printf(<span class="string">&quot;index: %d, value: 0x%x\n&quot;</span>, i, v)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行一下这段代码，我们得到:</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="comment">// for 迭代</span></span><br><span class="line">index: <span class="number">0</span>, value: <span class="number">0xe4</span></span><br><span class="line">index: <span class="number">1</span>, value: <span class="number">0xb8</span></span><br><span class="line">index: <span class="number">2</span>, value: <span class="number">0xad</span></span><br><span class="line">index: <span class="number">3</span>, value: <span class="number">0xe5</span></span><br><span class="line">index: <span class="number">4</span>, value: <span class="number">0x9b</span></span><br><span class="line">index: <span class="number">5</span>, value: <span class="number">0xbd</span></span><br><span class="line">index: <span class="number">6</span>, value: <span class="number">0xe4</span></span><br><span class="line">index: <span class="number">7</span>, value: <span class="number">0xba</span></span><br><span class="line">index: <span class="number">8</span>, value: <span class="number">0xba</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// for range迭代</span></span><br><span class="line">index: <span class="number">0</span>, value: <span class="number">0x4e2d</span></span><br><span class="line">index: <span class="number">3</span>, value: <span class="number">0x56fd</span></span><br><span class="line">index: <span class="number">6</span>, value: <span class="number">0x4eba</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串连接"><a href="#字符串连接" class="headerlink" title="字符串连接"></a>字符串连接</h3><p>Go 原生支持通过 +&#x2F;+&#x3D; 操作符进行字符串连接</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line">s := <span class="string">&quot;Rob Pike, &quot;</span></span><br><span class="line">s = s + <span class="string">&quot;Robert Griesemer, &quot;</span></span><br><span class="line">s += <span class="string">&quot; Ken Thompson&quot;</span></span><br><span class="line"></span><br><span class="line">fmt.Println(s) <span class="comment">// Rob Pike, Robert Griesemer, Ken Thompson</span></span><br></pre></td></tr></table></figure>
+<p>虽然通过 +&#x2F;+&#x3D; 进行字符串连接的开发体验是最好的, 但性能略差，Go 还提供了 strings.Builder、strings.Join、fmt.Sprintf 等函数来进行字符串连接操作以更好的解决性能问题</p>
+<h3 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h3><p>Go 字符串类型支持各种比较关系操作符，包括 &#x3D; &#x3D;、!&#x3D; 、&gt;&#x3D;、&lt;&#x3D;、&gt; 和 &lt;。在字符串的比较上，Go 采用字典序的比较策略，分别从每个字符串的起始处，开始逐个字节地对两个字符串类型变量进行比较。</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="comment">// ==</span></span><br><span class="line">        s1 := <span class="string">&quot;世界和平&quot;</span></span><br><span class="line">        s2 := <span class="string">&quot;世界&quot;</span> + <span class="string">&quot;和平&quot;</span></span><br><span class="line">        fmt.Println(s1 == s2) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// !=</span></span><br><span class="line">        s1 = <span class="string">&quot;Go&quot;</span></span><br><span class="line">        s2 = <span class="string">&quot;C&quot;</span></span><br><span class="line">        fmt.Println(s1 != s2) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// &lt; and &lt;=</span></span><br><span class="line">        s1 = <span class="string">&quot;12345&quot;</span></span><br><span class="line">        s2 = <span class="string">&quot;23456&quot;</span></span><br><span class="line">        fmt.Println(s1 &lt; s2)  <span class="comment">// true</span></span><br><span class="line">        fmt.Println(s1 &lt;= s2) <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// &gt; and &gt;=</span></span><br><span class="line">        s1 = <span class="string">&quot;12345&quot;</span></span><br><span class="line">        s2 = <span class="string">&quot;123&quot;</span></span><br><span class="line">        fmt.Println(s1 &gt; s2)  <span class="comment">// true</span></span><br><span class="line">        fmt.Println(s1 &gt;= s2) <span class="comment">// true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="字符串转换"><a href="#字符串转换" class="headerlink" title="字符串转换"></a>字符串转换</h3><p>Go 支持字符串与字节切片、字符串与 rune 切片的双向转换，并且这种转换无需调用任何函数，只需使用显式类型转换即可</p>
+<figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> s <span class="type">string</span> = <span class="string">&quot;中国人&quot;</span></span><br><span class="line">                      </span><br><span class="line"><span class="comment">// string -&gt; []rune</span></span><br><span class="line">rs := []<span class="type">rune</span>(s) </span><br><span class="line">fmt.Printf(<span class="string">&quot;%x\n&quot;</span>, rs) <span class="comment">// [4e2d 56fd 4eba]</span></span><br><span class="line">                </span><br><span class="line"><span class="comment">// string -&gt; []byte</span></span><br><span class="line">bs := []<span class="type">byte</span>(s) </span><br><span class="line">fmt.Printf(<span class="string">&quot;%x\n&quot;</span>, bs) <span class="comment">// e4b8ade59bbde4baba</span></span><br><span class="line">                </span><br><span class="line"><span class="comment">// []rune -&gt; string</span></span><br><span class="line">s1 := <span class="type">string</span>(rs)</span><br><span class="line">fmt.Println(s1) <span class="comment">// 中国人</span></span><br><span class="line">                </span><br><span class="line"><span class="comment">// []byte -&gt; string</span></span><br><span class="line">s2 := <span class="type">string</span>(bs)</span><br><span class="line">fmt.Println(s2) <span class="comment">// 中国人</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="扩展内容"><a href="#扩展内容" class="headerlink" title="扩展内容"></a>扩展内容</h2><h3 id="UTF-8采用不定长的设计，如何辨别几个字节为一个字符"><a href="#UTF-8采用不定长的设计，如何辨别几个字节为一个字符" class="headerlink" title="UTF-8采用不定长的设计，如何辨别几个字节为一个字符?"></a>UTF-8采用不定长的设计，如何辨别几个字节为一个字符?</h3><table>
+<thead>
+<tr>
+<th>unicode 符号范围</th>
+<th>utf-8 编码方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>00000000 ~ 0000007F</td>
+<td>0xxxxxxx</td>
+</tr>
+<tr>
+<td>00000080 ~ 000007FF</td>
+<td>110xxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>00000800 ~ 0000FFFF</td>
+<td>1110xxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>00010000 ~ 0010FFFF</td>
+<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+</tbody></table>
+<p>总结下来，针对UTF8，编码规则其实只有两条：</p>
+<ol>
+<li>单字节规则： 对于 单字节 的符号，字节的第一位（最高位）设为 0，后面 7 位为这个符号的 unicode 码。</li>
+<li>n字节规则： 对于 n 字节的符号（n&gt;1），第一个字节的前 n 位都设为 1，第 n+1 位设为 0，后面字节的前两位一律设为 10。剩下的没有提及的二进制位，全部为这个符号的 unicode 码。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Go学习笔记</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+        <tag>编解码</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Prometheus | PromQL</title>
+    <url>/2022/07/05/Alert/prometheus-pql/</url>
+    <content><![CDATA[<h2 id="0-什么是PromQL"><a href="#0-什么是PromQL" class="headerlink" title="0. 什么是PromQL"></a>0. 什么是PromQL</h2><blockquote>
+<p>PromQL（Prometheus Query Language）是 Prometheus 内置的数据查询语言，它能实现对事件序列数据的查询、聚合、逻辑运算等。它并且被广泛应用在 Prometheus 的日常应用当中，包括对数据查询、可视化、告警处理当中。简单地说，PromQL 广泛存在于以 Prometheus 为核心的监控体系中。所以需要用到数据筛选的地方，就会用到 PromQL。例如：监控指标的设置、报警指标的设置等等。</p>
+</blockquote>
+<h2 id="1-基础用法"><a href="#1-基础用法" class="headerlink" title="1. 基础用法"></a>1. 基础用法</h2><p>当我们直接使用监控指标名称查询时，可以查询该指标下的所有时间序列。<br><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20220705202637.png"><br>可以看到我们查询出了所有指标名称为 <code>prometheus_http_requests_total</code> 的数据。<br>PromQL 支持户根据时间序列的标签匹配模式来对时间序列进行过滤，目前主要支持两种匹配模式：完全匹配和正则匹配。</p>
+<h3 id="1-1-完全匹配"><a href="#1-1-完全匹配" class="headerlink" title="1.1 完全匹配"></a>1.1 完全匹配</h3><p>PromQL 支持使用 &#x3D; 和 !&#x3D; 两种完全匹配模式。</p>
+<ul>
+<li>等于。通过使用 <code>label=value</code> 可以选择那些标签满足表达式定义的时间序列。</li>
+<li>不等于。通过使用 <code>label!=value</code> 则可以根据标签匹配排除时间序列。</li>
+</ul>
+<p>例如我们上面查询出了所有指标名称为 <code>prometheus_http_requests_total</code> 的数据。这时候我们希望只查看错误的请求，即过滤掉所有 code 标签不是 200 的数据。</p>
+<p>那么我们的 PromQL 表达式可以修改为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prometheus_http_requests_total&#123;code!=&quot;200&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-正则匹配"><a href="#1-2-正则匹配" class="headerlink" title="1.2 正则匹配"></a>1.2 正则匹配</h3><p>PromQL 还可以使用正则表达式作为匹配条件，并且可以使用多个匹配条件。</p>
+<ul>
+<li>正向匹配。使用 <code>label=~regx</code> 表示选择那些标签符合正则表达式定义的时间序列。</li>
+<li>反向匹配。使用 <code>label!~regx</code> 进行排除。</li>
+</ul>
+<p>例如我想查询指标 <code>prometheus_http_requests_total</code> 中，所有 handler 标签以 &#x2F;api&#x2F;v1 开头的记录。</p>
+<p>那么我的表达式为：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prometheus_http_requests_total&#123;handler=~&quot;/api/v1/.*&quot;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-范围查询"><a href="#1-3-范围查询" class="headerlink" title="1.3 范围查询"></a>1.3 范围查询</h3><p>我们上面直接通过类似 <code>prometheus_http_requests_total</code> 表达式查询时间序列时，同一个指标同一标签只会返回一条数据。这样的表达式我们称之为<code>瞬间向量表达式</code>，返回的结果称之为<code>瞬间向量</code></p>
+<p>而如果我们想查询一段时间范围内的样本数据，那么我们就需要用到<code>区间向量表达式</code>，其查询出来的结果称之为<code>区间向量</code>。</p>
+<p>时间范围通过时间范围选择器 <code>[]</code> 进行定义。例如，通过以下表达式可以选择最近5分钟内的所有样本数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">prometheus_http_requests_total&#123;&#125;[5m]</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20220705204103.png"><br>通过查询结果可以看到，此时我们查询出了所有的样本数据，而不再是一个样本数据的统计值。</p>
+<p>PromQL的时间范围选择器支持其它时间单位: </p>
+<ul>
+<li>s - 秒</li>
+<li>m - 分</li>
+<li>h - 时</li>
+<li>d - 天</li>
+<li>w - 周</li>
+<li>y - 年</li>
+</ul>
+<h3 id="1-4-时间偏移"><a href="#1-4-时间偏移" class="headerlink" title="1.4 时间偏移"></a>1.4 时间偏移</h3><p>在瞬时向量表达式或者区间向量表达式中，都是以当前时间为基准。如果我们想查询 5 分钟前的瞬时样本数据，或昨天一天的区间内的样本数据呢? 这个时候我们就可以使用位移操作，位移操作的关键字为 <code>offset</code></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># 查询 5 分钟前的最新数据</span><br><span class="line">http_request_total&#123;&#125; offset 5m</span><br><span class="line"></span><br><span class="line"># 往前移动 1 天，查询 1 天前的数据</span><br><span class="line">http_request_total&#123;&#125;[1d] offset 1d</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-聚合查询"><a href="#1-5-聚合查询" class="headerlink" title="1.5 聚合查询"></a>1.5 聚合查询</h3><p>一般情况下，我们通过 PromQL 查询到的数据都是很多的。PromQL 提供的聚合操作可以用来对这些时间序列进行处理，形成一条新的时间序列。</p>
+<p>以我们的 <code>prometheus_http_requests_total</code> 指标为例，不加任何条件我们查询到的数据为：<br><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20220705204914.png"></p>
+<ul>
+<li><p>第一个表达式，计算一共有几条数据: </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">count(prometheus_http_requests_total)</span><br><span class="line"># 查询结果为8，代表总共有8条数据</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二个表达式，计算所有数据的 value 总和:</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sum(prometheus_http_requests_total)</span><br><span class="line"># 查询结果为307，代表所有数据的value之和为307</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="2-常用函数"><a href="#2-常用函数" class="headerlink" title="2. 常用函数"></a>2. 常用函数</h2><p>scalar(v instance-vector)是我们第一个见过的函数， 他将瞬时向量转化成标量。</p>
+<blockquote>
+<p>标量可以用于运算和可视化。例如和瞬时向量可以和标量进行加减乘除运算。只有一个时间序列的瞬时变量可以通过函数scalar()转化为标量。有时候在监控中，我们只需要知道当前的系统是不是健康的，当前磁盘空间是多少，只是后就可以用scalar()得到标量并在可视化工具中展示。</p>
+</blockquote>
+<p>abs(v instant-vector)可以将瞬时变量中的值转变为绝对值。</p>
+<p>increase(v range-vector) 求区间向量的增长量（最新值减最旧值）并返回一个瞬时向量。</p>
+]]></content>
+      <categories>
+        <category>监控告警</category>
+      </categories>
+      <tags>
+        <tag>Prometheus</tag>
+        <tag>PromQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LeetCode.139 | 单词拆分</title>
+    <url>/2022/05/20/LeetCode/139-word-break/</url>
+    <content><![CDATA[<h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a><a href="https://leetcode.cn/problems/word-break/">题目描述</a></h2><blockquote>
+<p>给你一个字符串 s 和一个字符串列表 wordDict 作为字典。请你判断是否可以利用字典中出现的单词拼接出 s 。<br>注意：不要求字典中出现的单词全部都使用，并且字典中的单词可以重复使用。</p>
+</blockquote>
+<p>示例 ：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">输入: s = &quot;leetcode&quot;, wordDict = [&quot;leet&quot;, &quot;code&quot;]</span><br><span class="line">输出: true</span><br><span class="line">解释: 返回 true 因为 &quot;leetcode&quot; 可以由 &quot;leet&quot; 和 &quot;code&quot; 拼接成。</span><br></pre></td></tr></table></figure>
+
+<h2 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h2><p>假如要判断字符串”catsanddog”是否满足条件，我们可以采取<code>分而治之</code>的思路去思考，比如将字符串切割成两部分去分别判断，当前后两部分都满足条件时则可以证明这个字符串整体也是满足条件的；</p>
+<p>这种思路的本质是将字符串分为两部分去看，后半部分为<code>本次待判断</code>的字符串，前半部分为不包括最后一个字符串的其余部分。那么如何求前半部分是否满足条件呢? 也可以通过相同的方式在进行一次分割判断。</p>
+<p>此时已经将此问题翻译成了一个标准的动态规划题目</p>
+<h2 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h2><p>代码实现上可以采取两层循环的方式: <code>外层循环</code>设置变量i作为每个<code>待判断子串</code>(即s[0,i])的结尾。从1开始，循环至字符串最后一个字符，逐步判断每个子串是否满足条件，并将结果记录下来方便对下个子串进行判断时的搜索。即逐步判断’c’, ‘ca’, ‘cat’, ‘cats’ … ‘catsanddog’是否满足条件。 </p>
+<p><code>内层循环</code>设置变量j在每个由外层循环切割出的子串内进行<code>遍历切割</code>，根据记忆化搜索的结果判断当前子串是否满足条件。比如待判断子串为’catsanddog’时，将其切割为[‘c’, ‘atsanddog’]、[‘ca’, ‘tsanddog’]等等，最终发现切割为[‘catsand’, ‘dog’]时可以满足条件(‘catsand’子串命中记忆化搜索，’dog’命中字典)</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight go"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">wordBreak</span><span class="params">(s <span class="type">string</span>, wordDict []<span class="type">string</span>)</span></span> <span class="type">bool</span> &#123;</span><br><span class="line">    wordDictSet := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">bool</span>&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> _,v := <span class="keyword">range</span> wordDict&#123;</span><br><span class="line">        wordDictSet[v] = <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">    dp := <span class="built_in">make</span>([]<span class="type">bool</span>, <span class="built_in">len</span>(s)+<span class="number">1</span>)</span><br><span class="line">    dp[<span class="number">0</span>] = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">for</span> i:=<span class="number">1</span>;i&lt;=<span class="built_in">len</span>(s);i++&#123;</span><br><span class="line">        <span class="keyword">for</span> j:=<span class="number">0</span>;j&lt;i;j++&#123;</span><br><span class="line">            <span class="keyword">if</span> dp[j] &amp;&amp; wordDictSet[s[j:i]]&#123;</span><br><span class="line">                dp[i] = <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> dp[<span class="built_in">len</span>(s)]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>收藏从未停止 ⏹</title>
+    <url>/2022/07/24/Other/%E9%80%9F%E6%9F%A5/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th>速查表</th>
+<th>链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MarkDown</td>
+<td><a href="https://markdown.com.cn/">https://markdown.com.cn/</a></td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>杂记</category>
+      </categories>
+      <tags>
+        <tag>速查</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Python单元测试</title>
+    <url>/2022/08/10/PythonNote/PythonUnitTest/</url>
+    <content><![CDATA[<h2 id="1-PyTest安装"><a href="#1-PyTest安装" class="headerlink" title="1. PyTest安装:"></a>1. PyTest安装:</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt; pip install pytest</span><br><span class="line"></span><br><span class="line"><span class="comment"># 常用插件安装</span></span><br><span class="line">&gt;&gt;&gt; pip install pytest-mock  <span class="comment"># mocker插件</span></span><br><span class="line">&gt;&gt;&gt; pip install pytest-cov   <span class="comment"># 单测覆盖率插件</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-基础用法"><a href="#2-基础用法" class="headerlink" title="2. 基础用法"></a>2. 基础用法</h2><p>定义一个函数如下:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_sum</span>(<span class="params">a, b</span>):</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;calling get_sum function&quot;</span></span><br><span class="line">	<span class="keyword">return</span> a + b</span><br></pre></td></tr></table></figure>
+
+<p>为了验证其功能，我们可以编写单测用例如下:</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pytest</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestTmpFunction</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">test_sum</span>(<span class="params">self</span>):</span><br><span class="line">		result = get_sum(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">		<span class="built_in">print</span> result</span><br><span class="line">		<span class="keyword">assert</span> result == <span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>运行用例:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt; python -m pytest -v test_tmp.py -s</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-1-命令行参数"><a href="#2-1-命令行参数" class="headerlink" title="2.1 命令行参数"></a>2.1 命令行参数</h3><p>可以通过<code>pytest -help</code> 查看支持的参数。以下是一些常用的参数:</p>
+<ul>
+<li><code>-v</code>: 输出更详细的用例执行信息, 不使用 -v 参数，运行时不会显示运行的具体测试用例名称；</li>
+<li><code>-s</code>: 显示print内容 在运行测试用例时，为了调试或打印一些内容，我们会在代码中加一些print内容，但是这些内容默认不会显示出来。如果带上-s，就可以显示了。</li>
+<li><code>-x</code>: 出现一条测试用例失败就退出测试。 </li>
+<li><code>-m</code>: 用表达式指定多个标记名。 pytest 提供了一个装饰器 @pytest.mark.xxx，用于标记测试并分组，以便你快速选中并运行，各个分组直接用 and、or 来分割。</li>
+</ul>
+<h3 id="2-2-选择执行的测试用例-静态"><a href="#2-2-选择执行的测试用例-静态" class="headerlink" title="2.2 选择执行的测试用例(静态)"></a>2.2 选择执行的测试用例(静态)</h3><p>按文件夹执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">执行指定文件夹及子文件夹下的所有测试用例</span></span><br><span class="line">pytest ../tests</span><br></pre></td></tr></table></figure>
+
+<p>按文件执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">运行test_tmp.py下的所有的测试用例</span></span><br><span class="line">pytest test_tmp.py</span><br></pre></td></tr></table></figure>
+
+<p>按测试类执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pytest 文件名.py::测试类</span></span><br><span class="line">pytest test_tmp.py::TestTmp</span><br></pre></td></tr></table></figure>
+
+<p>按测试方法执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">pytest 文件名.py::测试类::测试方法</span></span><br><span class="line">pytest test_tmp.py::TestTmpFunction::test_sum</span><br></pre></td></tr></table></figure>
+
+<h3 id="选择执行的测试用例-动态"><a href="#选择执行的测试用例-动态" class="headerlink" title="选择执行的测试用例(动态)"></a>选择执行的测试用例(动态)</h3><p>如要使用动态指定测试用例的方式，首先需要给测试用例打标签（mark），比如在 <code>class</code>、<code>method</code> 上加上如下装饰器：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="meta">@pytest.mark.dev_test</span></span><br></pre></td></tr></table></figure>
+<p>在运行时，可以根据标签来动态的选择哪些用例需要执行</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">同时选中带有这两个标签的所有测试用例运行</span></span><br><span class="line">pytest -m &quot;mark1 and mark2&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选中带有mark1的测试用例，不运行mark2的测试用例</span></span><br><span class="line">pytest -m &quot;mark1 and not mark2&quot;</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">选中带有mark1或 mark2标签的所有测试用例</span></span><br><span class="line">pytest -m &quot;mark1 or mark2&quot;</span><br></pre></td></tr></table></figure>
+
+<p>除此之外还提供了一种通过模糊匹配的方式选择测试用例的方式:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">-k 参数是按照文件名、类名、方法名、标签名来模糊匹配的</span></span><br><span class="line">pytest -k xxxPattern</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-mock使用"><a href="#3-mock使用" class="headerlink" title="3. mock使用"></a>3. mock使用</h2><p>pytest自带的unittest框架中默认集成了mock库，PyTest的mock支持是通过插件实现的。相对来讲PyTest使用起来更简单(PyTest的mocker是对原生mock的一个兼容，原生mock支持的功能mocker基本都可以支持)</p>
+<h3 id="3-1-基础用法"><a href="#3-1-基础用法" class="headerlink" title="3.1 基础用法"></a>3.1 基础用法</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_sum</span>(<span class="params">a, b</span>):</span><br><span class="line">	<span class="built_in">print</span> <span class="string">&quot;calling get_sum function&quot;</span></span><br><span class="line">	<span class="keyword">return</span> a + b</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TestTmpFunction</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">test_sum_with_mock</span>(<span class="params">self, mocker</span>):</span><br><span class="line">		mocker.patch(<span class="string">&#x27;test_tmp.get_sum&#x27;</span>, return_value=<span class="number">3</span>)</span><br><span class="line">		result = get_sum(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">		<span class="built_in">print</span> result</span><br><span class="line">		<span class="keyword">assert</span> result == <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>运行后可以发现，原本<code>get_sum</code>的print内容并没有被打印出来，我们通过<code>mocker.patch</code>方法屏蔽掉了原函数，转而直接返回我们指定的返回结果</p>
+<h3 id="3-2-其他用法"><a href="#3-2-其他用法" class="headerlink" title="3.2 其他用法"></a>3.2 其他用法</h3><p>mocker.patch的函数定义</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">unittest.mock.patch(target, new=DEFAULT, spec=<span class="literal">None</span>, create=<span class="literal">False</span>, spec_set=<span class="literal">None</span>, autospec=<span class="literal">None</span>, new_callable=<span class="literal">None</span>, **kwargs)</span><br></pre></td></tr></table></figure>
+<p>常用参数含义：</p>
+<ul>
+<li><code>target</code>: 模拟对象的路径，参数必须是一个str,格式为’package.module.ClassName’，注意这里的格式一定要写对。如果对象和mock函数在同一个文件中，路径要加文件名</li>
+<li><code>return_value</code>: 模拟函数返回的结果</li>
+<li><code>side_effect</code>: 调用mock时的返回值，可以是函数，异常类，可迭代对象。当设置了该方法时，如果该方法返回值是DEFAULT，那么返回return_value的值，如果不是，则返回该方法的值。 return_value 和 side_effect 同时存在，side_effect会返回。(如果 side_effect 是异常类或实例时，调用模拟程序时将引发异常。如果 side_effect 是可迭代对象，则每次调用 mock 都将返回可迭代对象的下一个值。如果设置为函数时其具体表现会替换被mock函数）</li>
+</ul>
+<h2 id="4-MagicMock"><a href="#4-MagicMock" class="headerlink" title="4. MagicMock"></a>4. MagicMock</h2><p>在mock的过程中，有时我们需要构造相对复杂的返回值，比如对db操作函数的mock，返回值往往是一个对象。这时候常规做法我们就需要定义一个类，并且将其实例化。<br>这种做法较为麻烦，且不够灵活。Python提供了一个MagicMock方法，我们可以较为方便的构造我们想要的数据类型。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TestTmpFunction</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">test_sum_with_magic_mock</span>(<span class="params">self, mocker</span>):</span><br><span class="line">		o1 = MagicMock(a=<span class="number">1</span>)</span><br><span class="line">		<span class="built_in">print</span> o1.a</span><br><span class="line"></span><br><span class="line">		o2 = MagicMock()</span><br><span class="line">		<span class="built_in">print</span> <span class="built_in">list</span>(o2)</span><br><span class="line">		o2.__iter__.return_value = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">		<span class="built_in">print</span> <span class="built_in">list</span>(o2)</span><br></pre></td></tr></table></figure>
+<p>在工程实践中，我们一般对MagicMock在进行一次封装</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">factory</span>(<span class="params">attrs=<span class="literal">None</span>, **kwargs</span>):</span><br><span class="line">	kwargs[<span class="string">&#x27;return_value&#x27;</span>] = <span class="literal">True</span></span><br><span class="line">	o = MagicMock(**kwargs)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">not</span> attrs:</span><br><span class="line">		<span class="keyword">return</span> o</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> k, v <span class="keyword">in</span> attrs.items():</span><br><span class="line">		<span class="built_in">setattr</span>(o, k, v)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> o</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-数据驱动"><a href="#5-数据驱动" class="headerlink" title="5. 数据驱动"></a>5. 数据驱动</h2><p>某些时候，我们希望我们的单测可以覆盖多种逻辑分支，这时为每一种case都单独写一个测试明显也是不现实的。PyTest为单测提供了参数化功能，也就是数据驱动</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TestTmpFunction</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"><span class="meta">	@pytest.mark.parametrize(<span class="params"><span class="string">&#x27;a, b, sum_result&#x27;</span>, [</span></span></span><br><span class="line"><span class="params"><span class="meta">		(<span class="params"><span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span></span>),</span></span></span><br><span class="line"><span class="params"><span class="meta">		(<span class="params"><span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span></span>),</span></span></span><br><span class="line"><span class="params"><span class="meta">	]</span>)</span></span><br><span class="line">	<span class="keyword">def</span> <span class="title function_">test_sum_with_param</span>(<span class="params">self, mocker, a, b, sum_result</span>):</span><br><span class="line">		result = get_sum(a, b)</span><br><span class="line">		<span class="built_in">print</span> result</span><br><span class="line">		<span class="keyword">assert</span> result == sum_result</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-代码覆盖率"><a href="#6-代码覆盖率" class="headerlink" title="6. 代码覆盖率"></a>6. 代码覆盖率</h2><p>PyTest提供了pytest-cov插件来实现代码覆盖率的统计.</p>
+<h3 id="6-1-基础用法"><a href="#6-1-基础用法" class="headerlink" title="6.1 基础用法"></a>6.1 基础用法</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt; pytest --cov --cov-report=xml</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-2-生成差异报表"><a href="#6-2-生成差异报表" class="headerlink" title="6.2 生成差异报表"></a>6.2 生成差异报表</h3><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt; diff-cover coverage.xml --compare-branch=origin/master --html-report report.html --fail-under=80</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Python学习笔记</category>
+      </categories>
+      <tags>
+        <tag>单元测试</tag>
       </tags>
   </entry>
 </search>
