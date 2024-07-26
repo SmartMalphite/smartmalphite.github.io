@@ -223,15 +223,15 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/12/29/NetworkSafe/4.SQL%E6%B3%A8%E5%85%A5(%E5%AE%9E%E6%88%98)/" target="_self">
-          0x04 注入攻击 (实战篇)
+        <a href="/2023/04/09/Redis/bloomFilter/" target="_self">
+          布隆过滤器
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/29/NetworkSafe/4.SQL%E6%B3%A8%E5%85%A5(%E5%AE%9E%E6%88%98)/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/09/Redis/bloomFilter/" target="_self">
         <div>
-          DVWA: 回显注入获取敏感数据 首先试探所查询的表有多少字段当执行到 1&#39; order by 3# 时sql语句报错, 说明该查询语句涉及到两个字段 知道列的数量后，接下来我们使用 union select联合查询继续获取信息 1&#39; union select database(),user()#通过上图返回信息，我们成功获取到：   当前网站使用数据库为 dvwa 当前执行查询用
+          一、布隆过滤器简介布隆过滤器，英文叫BloomFilter，可以说是一个二进制向量和一系列随机映射函数实现。 可以用于检索一个元素是否在一个集合中。 下图是一个例子，来看一下布隆过滤器的工作流程 有三个hash函数和一个位数组，例如单词oracle经过三个hash函数，得到第1、4、5位为1，在初始化时将数组的1、4、5位置为1. 后续如果我们需要判断oracle是否在此位数组中，则通过hash函
         </div>
       </a>
 
@@ -239,8 +239,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-29 14:58" pubdate>
-              2022-12-29
+            <time datetime="2023-04-09 22:00" pubdate>
+              2023-04-09
             </time>
           </div>
         
@@ -255,7 +255,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%BD%91%E5%AE%89%E7%AC%94%E8%AE%B0/" class="category-chain-item">网安笔记</a>
+  <a href="/categories/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">Redis学习笔记</a>
   
   
 
@@ -270,253 +270,7 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">#注入攻击</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/12/29/NetworkSafe/3.SQL%E6%B3%A8%E5%85%A5(%E7%90%86%E8%AE%BA)/" target="_self">
-          0x03 注入攻击 (理论篇)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/29/NetworkSafe/3.SQL%E6%B3%A8%E5%85%A5(%E7%90%86%E8%AE%BA)/" target="_self">
-        <div>
-          一、SQL注入攻击介绍Sql 注入攻击是通过将恶意的 Sql 查询或添加语句插入到应用的输入参数中，再在后台 Sql 服务器上解析执行进行的攻击。SQL注入是发生于应用程序与数据库层的安全漏洞。注入的漏洞本质是代码和数据未分离，通过在用户可控参数中注入SQL语法，程序未对输入的指令进行合法性判断，注入进去的恶意指令就会被数据库服务器误认为是正常的SQL指令而运行，破坏原有 SQL 结构，达到编写程
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-29 14:48" pubdate>
-              2022-12-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BD%91%E5%AE%89%E7%AC%94%E8%AE%B0/" class="category-chain-item">网安笔记</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%B3%A8%E5%85%A5%E6%94%BB%E5%87%BB/">#注入攻击</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/12/29/NetworkSafe/2.XSS%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86(%E5%AE%9E%E6%88%98)/" target="_self">
-          0x02 XSS攻击 (实战篇)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/29/NetworkSafe/2.XSS%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86(%E5%AE%9E%E6%88%98)/" target="_self">
-        <div>
-          Juice Shop: Bonus Payload 与 DOM XSS 考察点: DOM型XSS攻击难度: 一星  这两道题的考察点类似，都是对DOM型XSS攻击的练习  找到输入框，随意输入内容进行测试  通过试探可以发现一下线索:   搜索内容会拼接在url中;  前端html展示时会拼接搜索内容   构造恶意代码尝试进行注入将题目中提供的payload输入搜索框，回车后注入成功，恶意代码执行
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-29 14:38" pubdate>
-              2022-12-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BD%91%E5%AE%89%E7%AC%94%E8%AE%B0/" class="category-chain-item">网安笔记</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/XSS%E6%94%BB%E5%87%BB/">#XSS攻击</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/12/29/NetworkSafe/1.XSS%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86(%E7%90%86%E8%AE%BA)/" target="_self">
-          0x01 XSS攻击 (理论篇)
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/29/NetworkSafe/1.XSS%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86(%E7%90%86%E8%AE%BA)/" target="_self">
-        <div>
-          一、XSS攻击介绍Cross-Site Scripting（跨站脚本攻击）简称 XSS，是一种代码注入攻击。攻击者通过在目标网站上注入恶意脚本，使之在用户的浏览器上运行。利用这些恶意脚本，攻击者可获取用户的敏感信息如 Cookie、SessionID 等，进而危害数据安全。 为了和 CSS 区分，这里把攻击的第一个字母改成了 X，于是叫做 XSS。 XSS 的本质是：恶意代码未经过滤，与网站正常的
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-29 14:28" pubdate>
-              2022-12-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BD%91%E5%AE%89%E7%AC%94%E8%AE%B0/" class="category-chain-item">网安笔记</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/XSS%E6%94%BB%E5%87%BB/">#XSS攻击</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/12/29/NetworkSafe/0.%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/" target="_self">
-          0x00 靶场搭建
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/12/29/NetworkSafe/0.%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/" target="_self">
-        <div>
-          一、OWASP靶场搭建1.靶场介绍OWASP Juice shop，该漏洞靶场是由owasp开发的，包含了owasp的十大漏洞，以闯关的模式来进行安全技能训练 2.搭建Juice shop是个开源项目，源码可在github上获取. 最方便的方式是使用docker进行安装. (这里使用的版本是v14.3.1) 123$ docker pull bkimminich&#x2F;juice-shop$ docke
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-12-29 14:18" pubdate>
-              2022-12-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E7%BD%91%E5%AE%89%E7%AC%94%E8%AE%B0/" class="category-chain-item">网安笔记</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/OWASP%E9%9D%B6%E5%9C%BA/">#OWASP靶场</a>
-            
-              <a href="/tags/DVWA%E9%9D%B6%E5%9C%BA/">#DVWA靶场</a>
+              <a href="/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E5%BC%80%E5%8F%91/">#高性能开发</a>
             
           </div>
         
@@ -829,11 +583,255 @@
     </article>
   </div>
 
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/10/04/GoNote/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" target="_self">
+          Go逃逸分析
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/10/04/GoNote/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/" target="_self">
+        <div>
+          1. 什么是逃逸分析在C&#x2F;C++中，对内存的操作经常需要小心翼翼，比如下面这段代码就隐藏了一个陷阱: 函数内部定义的局部变量，其内存是在栈上分配的(静态内存分布)，函数执行完毕后内存会被销毁。因此这段代码会直接崩溃。 12345&#x2F;&#x2F;c++int* foo() &amp;#123;    int t &#x3D; 3;    return &amp;t;&amp;#125; 为了避免这个问题，需要对这段代码做一点改
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-10-04 21:48" pubdate>
+              2022-10-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">Go学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E9%80%83%E9%80%B8%E5%88%86%E6%9E%90/">#逃逸分析</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/09/22/LeetCode/%E4%BA%8C%E5%88%86%E6%B3%95%E4%B8%93%E9%A2%98/" target="_self">
+          二分法专题
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/22/LeetCode/%E4%BA%8C%E5%88%86%E6%B3%95%E4%B8%93%E9%A2%98/" target="_self">
+        <div>
+          二分法常见的几种题目类型 查找特定值 查找第一个大于(或等于)特定值的元素  – 「找下界」 查找最后一个小于(或等于)特定值的元素 – 「找上界」  二分法通用模板二分查找无论是找下界、还是找上界、还是找特定值，都可以套用「找下界」的模板代码：  循环条件为 left &lt;&#x3D; right，表示闭区间不为空 if 的判定条件和给定的比较规则是一致的：比如要找满足 x &gt;&amp;#x3
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-09-22 20:22" pubdate>
+              2022-09-22
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/LeetCode/" class="category-chain-item">LeetCode</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E4%BA%8C%E5%88%86%E6%B3%95/">#二分法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/09/06/GoNote/%E5%93%88%E5%B8%8C%E8%A1%A8/" target="_self">
+          Go的哈希表
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/06/GoNote/%E5%93%88%E5%B8%8C%E8%A1%A8/" target="_self">
+        <div>
+          map 的底层实现在源码中，表示 map 的结构体是 hmap，它是 hashmap 的“缩写”： 123456789101112131415161718192021&#x2F;&#x2F; A header for a Go map.type hmap struct &amp;#123;    &#x2F;&#x2F; 元素个数，调用 len(map) 时，直接返回此值	count     int	flags     uint8	&#x2F;&#x2F; buc
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-09-06 21:00" pubdate>
+              2022-09-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">Go学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GoLang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#GoLang数据结构</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/09/06/GoNote/%E6%95%B0%E7%BB%84%E5%88%87%E7%89%87/" target="_self">
+          Go的数组、切片
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2022/09/06/GoNote/%E6%95%B0%E7%BB%84%E5%88%87%E7%89%87/" target="_self">
+        <div>
+          数组与切片介绍slice 的底层数据是数组，slice 是对数组的封装，它描述一个数组的片段。两者都可以通过下标来访问单个元素。 数组是定长的，长度定义好之后，不能再更改。在 Go 中，数组是不常见的，因为其长度是类型的一部分，限制了它的表达能力，比如 [3]int 和 [4]int 就是不同的类型。 而切片则非常灵活，它可以动态地扩容。切片的类型和长度无关。 数组就是一片连续的内存， slice
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-09-06 21:00" pubdate>
+              2022-09-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">Go学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GoLang%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#GoLang数据结构</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

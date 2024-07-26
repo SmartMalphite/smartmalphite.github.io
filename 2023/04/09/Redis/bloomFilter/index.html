@@ -16,28 +16,24 @@
   <meta name="author" content="Enbo Wang">
   <meta name="keywords" content="">
   
-    <meta name="description" content="一、OWASP靶场搭建1.靶场介绍OWASP Juice shop，该漏洞靶场是由owasp开发的，包含了owasp的十大漏洞，以闯关的模式来进行安全技能训练 2.搭建Juice shop是个开源项目，源码可在github上获取. 最方便的方式是使用docker进行安装. (这里使用的版本是v14.3.1) 123$ docker pull bkimminich&#x2F;juice-shop$ docke">
+    <meta name="description" content="一、布隆过滤器简介布隆过滤器，英文叫BloomFilter，可以说是一个二进制向量和一系列随机映射函数实现。 可以用于检索一个元素是否在一个集合中。 下图是一个例子，来看一下布隆过滤器的工作流程 有三个hash函数和一个位数组，例如单词oracle经过三个hash函数，得到第1、4、5位为1，在初始化时将数组的1、4、5位置为1. 后续如果我们需要判断oracle是否在此位数组中，则通过hash函">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0x00 靶场搭建">
-<meta property="og:url" content="https://smartmalphite.github.io/2022/12/29/NetworkSafe/0.%E9%9D%B6%E5%9C%BA%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:title" content="布隆过滤器">
+<meta property="og:url" content="https://smartmalphite.github.io/2023/04/09/Redis/bloomFilter/index.html">
 <meta property="og:site_name" content="WEB&#39;s NoteBook">
-<meta property="og:description" content="一、OWASP靶场搭建1.靶场介绍OWASP Juice shop，该漏洞靶场是由owasp开发的，包含了owasp的十大漏洞，以闯关的模式来进行安全技能训练 2.搭建Juice shop是个开源项目，源码可在github上获取. 最方便的方式是使用docker进行安装. (这里使用的版本是v14.3.1) 123$ docker pull bkimminich&#x2F;juice-shop$ docke">
+<meta property="og:description" content="一、布隆过滤器简介布隆过滤器，英文叫BloomFilter，可以说是一个二进制向量和一系列随机映射函数实现。 可以用于检索一个元素是否在一个集合中。 下图是一个例子，来看一下布隆过滤器的工作流程 有三个hash函数和一个位数组，例如单词oracle经过三个hash函数，得到第1、4、5位为1，在初始化时将数组的1、4、5位置为1. 后续如果我们需要判断oracle是否在此位数组中，则通过hash函">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229143054.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229150024.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229150312.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229171011.png">
-<meta property="article:published_time" content="2022-12-29T06:18:49.000Z">
-<meta property="article:modified_time" content="2022-12-29T09:12:41.526Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20230409224818.png">
+<meta property="article:published_time" content="2023-04-09T14:00:49.000Z">
+<meta property="article:modified_time" content="2023-05-05T11:52:56.838Z">
 <meta property="article:author" content="Enbo Wang">
-<meta property="article:tag" content="OWASP靶场">
-<meta property="article:tag" content="DVWA靶场">
+<meta property="article:tag" content="高性能开发">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229143054.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20230409224818.png">
   
   
   
-  <title>0x00 靶场搭建 - WEB&#39;s NoteBook</title>
+  <title>布隆过滤器 - WEB&#39;s NoteBook</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -202,7 +198,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="0x00 靶场搭建"></span>
+            <span id="subtitle" data-typed-text="布隆过滤器"></span>
           
         </div>
 
@@ -218,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-12-29 14:18" pubdate>
-          2022年12月29日 下午
+        <time datetime="2023-04-09 22:00" pubdate>
+          2023年4月9日 晚上
         </time>
       </span>
     
@@ -231,7 +227,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          644 字
+          1.3k 字
         
       </span>
     
@@ -242,7 +238,7 @@
         
         
         
-          6 分钟
+          12 分钟
         
       </span>
     
@@ -280,27 +276,29 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">0x00 靶场搭建</h1>
+            <h1 style="display: none">布隆过滤器</h1>
             
             
               <div class="markdown-body">
                 
-                <h1 id="一、OWASP靶场搭建"><a href="#一、OWASP靶场搭建" class="headerlink" title="一、OWASP靶场搭建"></a>一、OWASP靶场搭建</h1><h2 id="1-靶场介绍"><a href="#1-靶场介绍" class="headerlink" title="1.靶场介绍"></a>1.靶场介绍</h2><p>OWASP Juice shop，该漏洞靶场是由owasp开发的，包含了owasp的十大漏洞，以闯关的模式来进行安全技能训练</p>
-<h2 id="2-搭建"><a href="#2-搭建" class="headerlink" title="2.搭建"></a>2.搭建</h2><p>Juice shop是个开源项目，源码可在github上获取. 最方便的方式是使用docker进行安装. (这里使用的版本是<code>v14.3.1</code>)</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull bkimminich/juice-shop</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d -p 3000:3000 bkimminich/juice-shop</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="3-预览"><a href="#3-预览" class="headerlink" title="3.预览"></a>3.预览</h2><p>容器启动后访问 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a> 界面如下<br><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229143054.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="4-第一关-Score-Board"><a href="#4-第一关-Score-Board" class="headerlink" title="4.第一关: Score Board"></a>4.第一关: Score Board</h2><blockquote>
-<p>考察点: 代码分析</p>
-</blockquote>
-<p>分析页面源码, 通过搜索关键字等方式找到隐藏的闯关入口以开始闯关。进入<code>开发者模式</code>查看页面源码以及js文件后发现隐藏的<code>/score-board</code>页面</p>
-<p><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229150024.png" srcset="/img/loading.gif" lazyload></p>
-<p>进入此页面后可以正式开始闯关~<br><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229150312.png" srcset="/img/loading.gif" lazyload></p>
-<h1 id="二、DVWA靶场搭建"><a href="#二、DVWA靶场搭建" class="headerlink" title="二、DVWA靶场搭建"></a>二、DVWA靶场搭建</h1><h2 id="1-靶场介绍-1"><a href="#1-靶场介绍-1" class="headerlink" title="1.靶场介绍"></a>1.靶场介绍</h2><p>DVWA 是一套易受攻击的由 PHP&#x2F;Mysql 搭建的 Web 安全测试平台，其主要目标是帮助安全专业人员在法律环境中测试他们的技能和工具，帮助 Web 开发人员更好地了解保护 Web 应用程序的过程</p>
-<h2 id="2-搭建-1"><a href="#2-搭建-1" class="headerlink" title="2.搭建"></a>2.搭建</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull citizenstig/dvwa</span><br><span class="hljs-meta prompt_"></span><br><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d -p 8080:80 citizenstig/dvwa</span><br></code></pre></td></tr></table></figure>
-
-<h2 id="3-配置-amp-预览"><a href="#3-配置-amp-预览" class="headerlink" title="3.配置 &amp; 预览"></a>3.配置 &amp; 预览</h2><p>浏览器打开 <a target="_blank" rel="noopener" href="http://localhost:8080/">http://localhost:8080/</a> 就可以看到页面了。这里需要初始化数据库，之后输入自己的用户名和密码。登录成功之后看到下图表示成功</p>
-<p><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20221229171011.png" srcset="/img/loading.gif" lazyload></p>
+                <h2 id="一、布隆过滤器简介"><a href="#一、布隆过滤器简介" class="headerlink" title="一、布隆过滤器简介"></a>一、布隆过滤器简介</h2><p>布隆过滤器，英文叫BloomFilter，可以说是一个二进制向量和一系列随机映射函数实现。 可以用于检索一个元素是否在一个集合中。</p>
+<p>下图是一个例子，来看一下布隆过滤器的工作流程<br><img src="https://raw.githubusercontent.com/SmartMalphite/PicBed/master/img-hexo/20230409224818.png" srcset="/img/loading.gif" lazyload></p>
+<p>有三个hash函数和一个位数组，例如单词<code>oracle</code>经过三个hash函数，得到第1、4、5位为1，在初始化时将数组的1、4、5位置为1. 后续如果我们需要判断<code>oracle</code>是否在此位数组中，则通过hash函数判断位数组的1、4、5位是否均为1，如果均为1，则判断<code>oracle</code>在此位数组中。这就是布隆过滤器判断元素是否在集合中的原理。</p>
+<h2 id="二、布隆过滤器存在的问题"><a href="#二、布隆过滤器存在的问题" class="headerlink" title="二、布隆过滤器存在的问题"></a>二、布隆过滤器存在的问题</h2><p>了解了原理之后，也很容易发现它存在的两个问题: 误判 &amp; 不可删除</p>
+<h3 id="1-误判"><a href="#1-误判" class="headerlink" title="1. 误判"></a>1. 误判</h3><p>还是上面的例子，如果<code>bloom</code>经过三个hash算法，需要判断 1、5、10位是否为1，恰好因为位数组中添加<code>oracle</code>和<code>database</code>导致1、5、10位为1，则布隆过滤器会判断<code>bloom</code>在集合中，导致误判。</p>
+<p>因此，高效插入和查询的代价就是，它是一个基于概率的数据结构，<em>只能告诉我们一个元素绝对不在集合内，对于存在集合内有一定的误判率。</em></p>
+<p>但是布隆过滤器的空间效率和查询时间都远远高于一般的算法，使得这个缺点在某些应用场景中是可以接受的</p>
+<h3 id="2-不可删除"><a href="#2-不可删除" class="headerlink" title="2. 不可删除"></a>2. 不可删除</h3><p>布隆过滤器判断一个元素存在就是判断对应位置是否为 1 来确定的，但是如果要删除掉一个元素是不能直接把 1 改成 0 的，因为这个位置可能存在其他元素，直接删除会对其他元素的判定结果产生影响。</p>
+<h2 id="三、应用场景"><a href="#三、应用场景" class="headerlink" title="三、应用场景"></a>三、应用场景</h2><ul>
+<li>网页黑名单过滤：由于互联网上存在大量的恶意网站和垃圾网站，为了保护用户的隐私和安全，很多网站都会采用布隆过滤器来过滤黑名单中的网站。</li>
+<li>垃圾邮件过滤：在邮件服务器中，需要对接收到的邮件进行分类，将垃圾邮件过滤掉，保证用户只接收到有用的邮件。布隆过滤器可以对邮件进行快速过滤，提高过滤的效率。</li>
+<li>缓存过滤：在缓存中，需要快速判断某个键值对是否存在。如果缓存中的键值对非常多，使用线性搜索的方式会非常耗时。这时可以使用布隆过滤器对键进行过滤，减少无用的搜索。</li>
+<li>URL去重：爬虫在爬取网页时需要去重，防止重复下载同一个页面。布隆过滤器可以快速判断URL是否已经被爬取过。</li>
+</ul>
+<h2 id="四、实践中遇到的问题"><a href="#四、实践中遇到的问题" class="headerlink" title="四、实践中遇到的问题"></a>四、实践中遇到的问题</h2><h3 id="1-如何降低误判率-fpp-？"><a href="#1-如何降低误判率-fpp-？" class="headerlink" title="1.如何降低误判率(fpp)？"></a>1.如何降低误判率(fpp)？</h3><p>我们可以提高数组长度以及 hash 计算次数来降低误报率，但是相应的 CPU、内存的消耗也会相应的提高；这需要我们根据自己的业务需要去权衡选择。</p>
+<h4 id="1-1-布隆过滤器应该设计为多大？"><a href="#1-1-布隆过滤器应该设计为多大？" class="headerlink" title="1.1 布隆过滤器应该设计为多大？"></a>1.1 布隆过滤器应该设计为多大？</h4><p>假设在布隆过滤器里面有 k 个哈希函数，m 个比特位（也就是位数组长度），以及 n 个已插入元素，错误率会近似于 (1-ekn&#x2F;m)k，所以你只需要先确定可能插入的数据集的容量大小 n，然后再调整 k 和 m 来为你的应用配置过滤器。</p>
+<h4 id="1-2-布隆过滤器应该使用多少个哈希函数？"><a href="#1-2-布隆过滤器应该使用多少个哈希函数？" class="headerlink" title="1.2 布隆过滤器应该使用多少个哈希函数？"></a>1.2 布隆过滤器应该使用多少个哈希函数？</h4><p>对于给定的 m（比特位个数）和 n（集合元素个数），最优的 k（哈希函数个数）值为: (m&#x2F;n)ln(2)</p>
+<h3 id="2-如何支持删除"><a href="#2-如何支持删除" class="headerlink" title="2.如何支持删除"></a>2.如何支持删除</h3><p>如果要支持删除，最简单的做法就是加一个计数器，就是说位数组的每个位如果不存在就是 0，存在几个元素就存具体的数字，而不仅仅只是存 1。<br>那么这就有一个问题，本来存 1 就是一位就可以满足了，但是如果要存具体的数字比如说 2，那就需要 2 位了，所以带有计数器的布隆过滤器会<code>占用更大的空间</code>。</p>
 
                 
               </div>
@@ -319,7 +317,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%BD%91%E5%AE%89%E7%AC%94%E8%AE%B0/" class="category-chain-item">网安笔记</a>
+  <a href="/categories/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">Redis学习笔记</a>
   
   
 
@@ -334,9 +332,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/OWASP%E9%9D%B6%E5%9C%BA/">#OWASP靶场</a>
-      
-        <a href="/tags/DVWA%E9%9D%B6%E5%9C%BA/">#DVWA靶场</a>
+        <a href="/tags/%E9%AB%98%E6%80%A7%E8%83%BD%E5%BC%80%E5%8F%91/">#高性能开发</a>
       
     </div>
   
@@ -348,8 +344,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>0x00 靶场搭建</div>
-      <div>https://smartmalphite.github.io/2022/12/29/NetworkSafe/0.靶场搭建/</div>
+      <div>布隆过滤器</div>
+      <div>https://smartmalphite.github.io/2023/04/09/Redis/bloomFilter/</div>
     </div>
     <div class="license-meta">
       
@@ -361,7 +357,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年12月29日</div>
+          <div>2023年4月9日</div>
         </div>
       
       
@@ -390,12 +386,6 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
-                    
-                      <a href="/2022/12/29/NetworkSafe/1.XSS%E9%97%AE%E9%A2%98%E5%90%88%E9%9B%86(%E7%90%86%E8%AE%BA)/" title="0x01 XSS攻击 (理论篇)">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">0x01 XSS攻击 (理论篇)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
                     
                   </article>
                   <article class="post-next col-6">
