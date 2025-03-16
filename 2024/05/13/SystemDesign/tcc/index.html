@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
-  <link rel="icon" href="/img/fluid.png">
+  <link rel="icon" href="/img/acator.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -19,7 +19,7 @@
     <meta name="description" content="一、TCC基础介绍TCC 模式是最经典的分布式事务解决方案，它将分布式事务分为两个阶段来执行，try 阶段对每个分支事务进行预留资源，如果所有分支事务都预留资源成功，则进入 commit 阶段提交全局事务，如果有一个节点预留资源失败则进入 cancel 阶段回滚全局事务。 以传统的订单、库存、账户服务为例，在 try 阶段尝试预留资源，插入订单、扣减库存、扣减金额，这三个服务都是要提交本地事务的，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TCC的基本原理与常见问题">
-<meta property="og:url" content="https://smartmalphite.github.io/2024/05/13/SystemDesign/bloomFilter/index.html">
+<meta property="og:url" content="https://smartmalphite.github.io/2024/05/13/SystemDesign/tcc/index.html">
 <meta property="og:site_name" content="WEB&#39;s NoteBook">
 <meta property="og:description" content="一、TCC基础介绍TCC 模式是最经典的分布式事务解决方案，它将分布式事务分为两个阶段来执行，try 阶段对每个分支事务进行预留资源，如果所有分支事务都预留资源成功，则进入 commit 阶段提交全局事务，如果有一个节点预留资源失败则进入 cancel 阶段回滚全局事务。 以传统的订单、库存、账户服务为例，在 try 阶段尝试预留资源，插入订单、扣减库存、扣减金额，这三个服务都是要提交本地事务的，">
 <meta property="og:locale" content="zh_CN">
@@ -95,7 +95,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>webのblog</strong>
+      <strong>web的博客</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -369,7 +369,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>TCC的基本原理与常见问题</div>
-      <div>https://smartmalphite.github.io/2024/05/13/SystemDesign/bloomFilter/</div>
+      <div>https://smartmalphite.github.io/2024/05/13/SystemDesign/tcc/</div>
     </div>
     <div class="license-meta">
       
@@ -410,6 +410,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/08/24/SystemDesign/throttling/" title="Google SRE弹性熔断算法（Client-Side Throttling）原理分析">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Google SRE弹性熔断算法（Client-Side Throttling）原理分析</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -470,6 +476,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -636,6 +648,40 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
