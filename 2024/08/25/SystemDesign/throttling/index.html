@@ -19,12 +19,12 @@
     <meta name="description" content="在微服务架构中，单个服务故障可能引发雪崩效应。传统熔断器（如Hystrix）通过固定阈值触发熔断，虽然能防止系统崩溃，但也存在两大痛点：  过度熔断：静态阈值无法适应动态负载，可能误伤健康服务 恢复震荡：从熔断状态恢复时易出现流量突刺，导致二次熔断  Google SRE弹性熔断算法（Client-Side Throttling）是一种基于请求成功率动态调整熔断策略的自适应算法，相比传统熔断器的固">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Google SRE弹性熔断算法（Client-Side Throttling）原理分析">
-<meta property="og:url" content="https://smartmalphite.github.io/2024/08/24/SystemDesign/throttling/index.html">
+<meta property="og:url" content="https://smartmalphite.github.io/2024/08/25/SystemDesign/throttling/index.html">
 <meta property="og:site_name" content="WEB&#39;s NoteBook">
 <meta property="og:description" content="在微服务架构中，单个服务故障可能引发雪崩效应。传统熔断器（如Hystrix）通过固定阈值触发熔断，虽然能防止系统崩溃，但也存在两大痛点：  过度熔断：静态阈值无法适应动态负载，可能误伤健康服务 恢复震荡：从熔断状态恢复时易出现流量突刺，导致二次熔断  Google SRE弹性熔断算法（Client-Side Throttling）是一种基于请求成功率动态调整熔断策略的自适应算法，相比传统熔断器的固">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-24T14:42:49.000Z">
-<meta property="article:modified_time" content="2025-03-16T14:49:34.126Z">
+<meta property="article:published_time" content="2024-08-25T14:42:49.000Z">
+<meta property="article:modified_time" content="2025-03-17T03:58:45.499Z">
 <meta property="article:author" content="Enbo Wang">
 <meta property="article:tag" content="系统设计方案">
 <meta property="article:tag" content="Golang">
@@ -214,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-24 22:42" pubdate>
-          2024年8月24日 晚上
+        <time datetime="2024-08-25 22:42" pubdate>
+          2024年8月25日 晚上
         </time>
       </span>
     
@@ -361,7 +361,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>Google SRE弹性熔断算法（Client-Side Throttling）原理分析</div>
-      <div>https://smartmalphite.github.io/2024/08/24/SystemDesign/throttling/</div>
+      <div>https://smartmalphite.github.io/2024/08/25/SystemDesign/throttling/</div>
     </div>
     <div class="license-meta">
       
@@ -373,7 +373,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月24日</div>
+          <div>2024年8月25日</div>
         </div>
       
       
@@ -402,6 +402,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2024/09/15/GoNote/GC%E4%BC%98%E5%8C%96/" title="Golang服务GC优化">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Golang服务GC优化</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

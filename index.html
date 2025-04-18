@@ -185,7 +185,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="Thinking will not overcome fear but action will."></span>
+            <span id="subtitle" data-typed-text="Forward ever, backward never."></span>
           
         </div>
 
@@ -223,13 +223,135 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2024/08/24/SystemDesign/throttling/" target="_self">
+        <a href="/2025/02/13/Kafka/reblance/" target="_self">
+          Kafka Reblance问题排查
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2025/02/13/Kafka/reblance/" target="_self">
+        <div>
+          背景当我们的服务用Golang重构完成后，在发布Kafka Consumer服务过程中遇到一个奇怪的问题就是发布后的一个小时内出现了大量的数据积压，一小时后恢复正常消费。 经过排查发现，服务在这一小时以内频繁进行Reblance，需要排查原因。 Reblance的触发条件 有新的consumer加入 有consumer下线 topic内partition数量变更 consumer client拉取
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2025-02-13 19:00" pubdate>
+              2025-02-13
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Kafka/" class="category-chain-item">Kafka</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E7%96%91%E9%9A%BE%E9%97%AE%E9%A2%98%E6%8E%92%E6%9F%A5/">#疑难问题排查</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/09/15/GoNote/GC%E4%BC%98%E5%8C%96/" target="_self">
+          Golang服务GC优化
+        </a>
+      </h1>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/15/GoNote/GC%E4%BC%98%E5%8C%96/" target="_self">
+        <div>
+          背景在上半年的服务性能优化项目中，主要针对业务代码不合理的地方进行了瘦身与优化。优化后压测的cpu pprof显示：gc消耗的cpu占比几乎达到25%，gc次数也比较多，因此在优化业务系统后，Golang GC是另一个性能瓶颈，存在很大的优化空间。 思路首先确定问题：在压测过程中GC CPU占比过大，GC次数较多； 初步解决思路：减少GC CPU占比 → 减少GC单次耗时或者减少GC次数 调研业内
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-15 21:48" pubdate>
+              2024-09-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Go%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="category-chain-item">Go学习笔记</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/GC%E4%BC%98%E5%8C%96/">#GC优化</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2024/08/25/SystemDesign/throttling/" target="_self">
           Google SRE弹性熔断算法（Client-Side Throttling）原理分析
         </a>
       </h1>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/24/SystemDesign/throttling/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/08/25/SystemDesign/throttling/" target="_self">
         <div>
           在微服务架构中，单个服务故障可能引发雪崩效应。传统熔断器（如Hystrix）通过固定阈值触发熔断，虽然能防止系统崩溃，但也存在两大痛点：  过度熔断：静态阈值无法适应动态负载，可能误伤健康服务 恢复震荡：从熔断状态恢复时易出现流量突刺，导致二次熔断  Google SRE弹性熔断算法（Client-Side Throttling）是一种基于请求成功率动态调整熔断策略的自适应算法，相比传统熔断器的固
         </div>
@@ -239,8 +361,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-08-24 22:42" pubdate>
-              2024-08-24
+            <time datetime="2024-08-25 22:42" pubdate>
+              2024-08-25
             </time>
           </div>
         
@@ -711,68 +833,13 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/05/17/Deploy/hexo/" target="_self">
-          Hexo 搭建 &amp; 使用指南
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2022/05/17/Deploy/hexo/" target="_self">
-        <div>
-          什么是Hexo Hexo 是一个可以易于上手、部署的静态博客架构。使用node.js作为构建引擎，插件库丰富，可扩展性好。支持MarkDown作为书写语言，可以满足日常博客编写需求  Hexo 安装安装Hexo前，需要本地环境已经安装有这两个东西:  Node.js Git  (这二者的安装就不在这里单独赘述了) 如果你的环境没有问题了，那么就可以开始安装Hexo了: 1npm install h
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-05-17 23:27" pubdate>
-              2022-05-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E6%9C%8D%E5%8A%A1%E6%90%AD%E5%BB%BA/" class="category-chain-item">服务搭建</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Hexo/">#Hexo</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
 
 
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 
